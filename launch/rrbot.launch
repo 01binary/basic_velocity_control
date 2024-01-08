@@ -6,7 +6,7 @@
   <!-- Model -->
   <param
     name="robot_description"
-    command="$(find xacro)/xacro '$(find basic_velocity_control/description/rrbot.xacro'"
+    command="$(find xacro)/xacro '$(find basic_velocity_control)/description/rrbot.xacro'"
   />
 
   <!-- Hardware -->
