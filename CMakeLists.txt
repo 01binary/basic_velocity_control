@@ -9,6 +9,7 @@ find_package(
     control_msgs
     control_toolbox
     controller_interface
+    controller_manager
     hardware_interface
     pluginlib
     realtime_tools
@@ -24,6 +25,7 @@ catkin_package(
     control_msgs
     control_toolbox
     controller_interface
+    controller_manager
     hardware_interface
     realtime_tools
     roscpp
