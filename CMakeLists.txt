@@ -30,34 +30,35 @@ catkin_package(
     trajectory_msgs
     urdf
   INCLUDE_DIRS
-    include
+    src
   LIBRARIES
     ${PROJECT_NAME}
 )
 
 include_directories(
-  include ${catkin_INCLUDE_DIRS}
+  src
+  ${catkin_INCLUDE_DIRS}
 )
 
 add_executable(
-  rrbot
+  rrbothw
     src/rrbot.cpp
 )
 
 add_dependencies(
-  rrbot
+  rrbothw
     ${${PROJECT_NAME}_EXPORTED_TARGETS}
     ${catkin_EXPORTED_TARGETS}
 )
 
 target_link_libraries(
-  rrbot
+  rrbothw
     ${catkin_LIBRARIES}
 )
 
 install(
   TARGETS
-    rrbot
+    rrbothw
   RUNTIME DESTINATION
     ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

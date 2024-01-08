@@ -11,9 +11,9 @@
 
   <!-- Hardware -->
   <node
-    name="rrbot"
+    name="rrbothw"
     pkg="basic_velocity_control"
-    type="rrbot"
+    type="rrbothw"
   />
 
   <!-- Configuration -->
