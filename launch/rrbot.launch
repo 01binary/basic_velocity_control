@@ -31,6 +31,15 @@
     args="rrbot_controller"
   />
 
+  <!-- Joint State to Transform Publisher -->
+  <node
+    name="robot_state_publisher"
+    pkg="robot_state_publisher"
+    type="robot_state_publisher"
+    respawn="false"
+    output="screen"
+  />
+
   <!-- Plots -->
   <node
     name="rrbot_pos_monitor"
