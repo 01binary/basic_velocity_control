@@ -168,7 +168,7 @@
 
   <transmission name="trans_shoulder">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="shoulder">
+    <joint name="shoulder_joint">
       <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
     </joint>
     <actuator name="shoulder_motor">
@@ -178,7 +178,7 @@
 
   <transmission name="trans_upperarm">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="upperarm">
+    <joint name="upperarm_joint">
       <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
     </joint>
     <actuator name="upperarm_motor">
@@ -188,7 +188,7 @@
 
   <transmission name="trans_forearm">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="forearm">
+    <joint name="forearm_joint">
       <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
     </joint>
     <actuator name="forearm_motor">
