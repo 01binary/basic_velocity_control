@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="robot">
 
   <!-- Links -->
 
@@ -11,7 +11,7 @@
         <mesh filename="package://basic_velocity_control/description/models/shoulder.stl" />
       </geometry>
       <material name="aluminum">
-          <color rgba="1 1 1 1" />
+        <color rgba="1 1 1 1" />
       </material>
     </visual>
     <collision>
@@ -22,16 +22,16 @@
     <inertial>
       <origin
         rpy="0 0 0"
-        xyz="0 0 0"
+        xyz="0 -0.500 0"
       />
-      <mass value="0" />
+      <mass value="445.83607510" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0"
+        ixx="43.01142466"
+        ixy="0.00000007"
+        ixz="0.00000003"
+        iyy="11.71683688"
+        iyz="-0.00000154"
+        izz="43.01142473"
       />
     </inertial>
   </link>
@@ -42,7 +42,7 @@
         <mesh filename="package://basic_velocity_control/description/models/upperarm.stl" />
       </geometry>
       <material name="aluminum">
-          <color rgba="1 1 1 1" />
+        <color rgba="1 1 1 1" />
       </material>
     </visual>
     <collision>
@@ -53,16 +53,16 @@
     <inertial>
       <origin
         rpy="0 0 0"
-        xyz="0 0 0"
+        xyz="1.34345613 0 0"
       />
-      <mass value="0" />
+      <mass value="1897.69177373" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0"
+        ixx="66.99460092"
+        ixy="0.00000001"
+        ixz="0.00000001"
+        iyy="2234.31516869"
+        iyz="-0.00000152"
+        izz="2258.25308259"
       />
     </inertial>
   </link>
@@ -73,7 +73,7 @@
         <mesh filename="package://basic_velocity_control/description/models/forearm.stl" />
       </geometry>
       <material name="aluminum">
-          <color rgba="1 1 1 1" />
+        <color rgba="1 1 1 1" />
       </material>
     </visual>
     <collision>
@@ -84,16 +84,16 @@
     <inertial>
       <origin
         rpy="0 0 0"
-        xyz="0 0 0"
+        xyz="1.41553743 0 0"
       />
-      <mass value="0" />
+      <mass value="722.16061394" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0"
+        ixx="9.87773403"
+        ixy="0.00000001"
+        ixz="0.00000001"
+        iyy="801.33982537"
+        iyz="0.00000001"
+        izz="804.66073917"
       />
     </inertial>
   </link>
@@ -104,7 +104,7 @@
         <sphere radius="0.05"/>
       </geometry>
       <material name="aluminum">
-          <color rgba="1 1 1 1" />
+        <color rgba="1 1 1 1" />
       </material>
     </visual>
     <collision>
