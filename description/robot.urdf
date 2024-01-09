@@ -132,7 +132,7 @@
   <!-- Joints -->
 
   <joint name="shoulder" type="revolute">
-    <origin rpy="0 0 0" xyz="0 0 0" />
+    <origin rpy="1.5708 0 0" xyz="0 0 1" />
     <axis xyz="0 1 0" />
     <parent link="world" />
     <child link="shoulder" />
@@ -150,7 +150,7 @@
   </joint>
 
   <joint name="forearm" type="revolute">
-    <origin rpy="0 0 0" xyz="0 0 0" />
+    <origin rpy="0 0 0" xyz="3.5 0 0" />
     <axis xyz="0 1 0" />
     <parent link="upperarm" />
     <child link="forearm" />
@@ -159,7 +159,7 @@
   </joint>
 
   <joint name="wrist" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.0 0.0" />
+    <origin rpy="0 0 0" xyz="3.5 0.0 0.0" />
     <parent link="forearm" />
     <child link="tool" />
   </joint>
