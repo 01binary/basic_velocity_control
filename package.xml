@@ -20,29 +20,5 @@
   <author>Adolfo Rodriguez Tsouroukdissian</author>
 
   <buildtool_depend>catkin</buildtool_depend>
-
-  <depend>actionlib</depend>
-  <depend>boost</depend>
-  <depend>control_toolbox</depend>
-  <depend>controller_interface</depend>
-  <depend>controller_manager</depend>
-  <depend>realtime_tools</depend>
-  <depend>roscpp</depend>
   <depend>urdf</depend>
-
-  <build_depend>angles</build_depend>
-  <build_depend>control_msgs</build_depend>
-  <build_depend>hardware_interface</build_depend>
-  <build_depend>pluginlib</build_depend>
-  <build_depend>trajectory_msgs</build_depend>
-
-  <build_export_depend>angles</build_export_depend>
-  <build_export_depend>control_msgs</build_export_depend>
-  <build_export_depend>hardware_interface</build_export_depend>
-  <build_export_depend>trajectory_msgs</build_export_depend>
-
-  <test_depend>controller_manager</test_depend>
-  <test_depend>xacro</test_depend>
-  <test_depend>rostest</test_depend>
-  <test_depend>std_msgs</test_depend>
 </package>
