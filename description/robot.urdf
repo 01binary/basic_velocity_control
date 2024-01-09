@@ -142,19 +142,19 @@
 
   <joint name="upperarm" type="revolute">
     <origin rpy="0 0 0" xyz="0 0 0" />
-    <axis xyz="0 1 0" />
+    <axis xyz="0 0 1" />
     <parent link="shoulder" />
     <child link="upperarm" />
-    <limit effort="100" velocity="1.0" lower="-1.5708" upper="1.5708" />
+    <limit effort="100" velocity="1.0" lower="-0.8417" upper="1.5708" />
     <dynamics damping="0.7" friction="1.4" />
   </joint>
 
   <joint name="forearm" type="revolute">
     <origin rpy="0 0 0" xyz="3.5 0 0" />
-    <axis xyz="0 1 0" />
+    <axis xyz="0 0 1" />
     <parent link="upperarm" />
     <child link="forearm" />
-    <limit effort="100" velocity="1.0" lower="-1.5708" upper="1.5708" />
+    <limit effort="100" velocity="1.0" lower="-1.5708" upper="0" />
     <dynamics damping="0.7" friction="1.4" />
   </joint>
 
