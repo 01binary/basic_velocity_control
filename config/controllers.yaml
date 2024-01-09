@@ -3,24 +3,30 @@ joint_state_controller:
   publish_rate: 50
 
 rrbot_controller:
-  type: "velocity_controllers/JointTrajectoryController"
+  type: velocity_controllers/JointTrajectoryController
   joints:
-    - joint1
-    - joint2
+    - shoulder
+    - upperarm
+    - forearm
 
   constraints:
     goal_time: 0.5
-    joint1:
+    shoulder:
       goal:       0.01
       trajectory: 0.05
-    joint2:
+    upperarm:
+      goal:       0.01
+      trajectory: 0.05
+    forearm:
       goal:       0.01
       trajectory: 0.05
 
   gains:
-    joint1: {p: 1.0,  i: 0.0, d: 0.0, i_clamp: 1}
-    joint2: {p: 1.0,  i: 0.0, d: 0.0, i_clamp: 1}
+    shoulder: {p: 1.0,  i: 0.0, d: 0.0, i_clamp: 1}
+    upperarm: {p: 1.0,  i: 0.0, d: 0.0, i_clamp: 1}
+    forearm: {p: 1.0,  i: 0.0, d: 0.0, i_clamp: 1}
 
   velocity_ff:
-    joint1: 1.0
-    joint2: 1.0
+    shoulder: 1.0
+    upperarm: 1.0
+    forearm: 1.0

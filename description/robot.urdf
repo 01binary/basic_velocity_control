@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Links -->
+
+  <link name="world" />
+
+  <link name="shoulder">
+    <visual>
+      <geometry>
+        <mesh filename="package://basic_velocity_control/description/models/shoulder.stl" />
+      </geometry>
+      <material name="aluminum">
+          <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://basic_velocity_control/description/models/shoulder.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        rpy="0 0 0"
+        xyz="0 0 0"
+      />
+      <mass value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0"
+      />
+    </inertial>
+  </link>
+
+  <link name="upperarm">
+    <visual>
+      <geometry>
+        <mesh filename="package://basic_velocity_control/description/models/upperarm.stl" />
+      </geometry>
+      <material name="aluminum">
+          <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://basic_velocity_control/description/models/upperarm.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        rpy="0 0 0"
+        xyz="0 0 0"
+      />
+      <mass value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0"
+      />
+    </inertial>
+  </link>
+
+  <link name="forearm">
+    <visual>
+      <geometry>
+        <mesh filename="package://basic_velocity_control/description/models/forearm.stl" />
+      </geometry>
+      <material name="aluminum">
+          <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://basic_velocity_control/description/models/forearm.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        rpy="0 0 0"
+        xyz="0 0 0"
+      />
+      <mass value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0"
+      />
+    </inertial>
+  </link>
+
+  <link name="tool">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <material name="aluminum">
+          <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        rpy="0 0 0"
+        xyz="0 0 0"
+      />
+      <mass value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0"
+      />
+    </inertial>
+  </link>
+
+  <!-- Joints -->
+
+  <joint name="shoulder" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <axis xyz="0 1 0" />
+    <parent link="world" />
+    <child link="shoulder" />
+    <limit effort="100" velocity="1.0" lower="-1.5708" upper="1.5708" />
+    <dynamics damping="0.7" friction="1.4" />
+  </joint>
+
+  <joint name="upperarm" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <axis xyz="0 1 0" />
+    <parent link="shoulder" />
+    <child link="upperarm" />
+    <limit effort="100" velocity="1.0" lower="-1.5708" upper="1.5708" />
+    <dynamics damping="0.7" friction="1.4" />
+  </joint>
+
+  <joint name="forearm" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <axis xyz="0 1 0" />
+    <parent link="upperarm" />
+    <child link="forearm" />
+    <limit effort="100" velocity="1.0" lower="-1.5708" upper="1.5708" />
+    <dynamics damping="0.7" friction="1.4" />
+  </joint>
+
+  <joint name="wrist" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.0 0.0" />
+    <parent link="forearm" />
+    <child link="tool" />
+  </joint>
+
+  <!-- Transmissions -->
+
+  <transmission name="trans_shoulder">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="shoulder">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="shoulder_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="trans_upperarm">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="upperarm">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="upperarm_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="trans_forearm">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="forearm">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="forearm_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- Plugins -->
+
+  <gazebo>
+    <plugin
+      name="gazebo_ros_control"
+      filename="libgazebo_ros_control.so"
+    >
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+</robot>

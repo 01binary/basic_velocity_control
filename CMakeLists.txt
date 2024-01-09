@@ -41,26 +41,3 @@ include_directories(
   src
   ${catkin_INCLUDE_DIRS}
 )
-
-add_executable(
-  rrbothw
-    src/rrbot.cpp
-)
-
-add_dependencies(
-  rrbothw
-    ${${PROJECT_NAME}_EXPORTED_TARGETS}
-    ${catkin_EXPORTED_TARGETS}
-)
-
-target_link_libraries(
-  rrbothw
-    ${catkin_LIBRARIES}
-)
-
-install(
-  TARGETS
-    rrbothw
-  RUNTIME DESTINATION
-    ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
