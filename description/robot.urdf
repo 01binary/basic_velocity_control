@@ -129,6 +129,68 @@
     </inertial>
   </link>
 
+  <link name="gripper_top">
+    <visual>
+      <geometry>
+        <mesh filename="package://basic_velocity_control/description/models/gripper-top.stl" />
+      </geometry>
+      <material name="aluminum">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://basic_velocity_control/description/models/gripper-top.stl" />
+      </geometry>
+    </collision>
+     <inertial>
+      <origin
+        rpy="0 0 0"
+        xyz="0 0 0"
+      />
+      <mass value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0"
+      />
+    </inertial>
+  </link>
+
+  <link name="gripper_bottom">
+    <visual>
+      <geometry>
+        <mesh filename="package://basic_velocity_control/description/models/gripper-bottom.stl" />
+      </geometry>
+      <material name="aluminum">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://basic_velocity_control/description/models/gripper-bottom.stl" />
+      </geometry>
+    </collision>
+     <inertial>
+      <origin
+        rpy="0 0 0"
+        xyz="0 0 0"
+      />
+      <mass value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0"
+      />
+    </inertial>
+  </link>
+
   <!-- Joints -->
 
   <joint name="shoulder_joint" type="revolute">
@@ -162,6 +224,22 @@
     <origin rpy="0 0 0" xyz="3.5 0.0 0.0" />
     <parent link="forearm" />
     <child link="tool" />
+  </joint>
+
+  <joint name="gripper_top_joint" type="prismatic">
+    <origin rpy="0 0 0" xyz="3.5 0.0 0.0" />
+    <axis xyz="0 0 1" />
+    <parent link="forearm" />
+    <limit effort="100000" velocity="1.0" lower="-0.01" upper="0" />
+    <dynamics damping="0.7" friction="1.4" />
+  </joint>
+
+  <joint name="gripper_bottom_joint" type="prismatic">
+    <origin rpy="0 0 0" xyz="3.5 0.0 0.0" />
+    <axis xyz="0 0 1" />
+    <parent link="forearm" />
+    <limit effort="100000" velocity="1.0" lower="0.01" upper="0" />
+    <dynamics damping="0.7" friction="1.4" />
   </joint>
 
   <!-- Transmissions -->
