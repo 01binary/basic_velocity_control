@@ -153,17 +153,17 @@
         <child link="tool" />
     </joint>
     <joint name="gripper_bottom_joint" type="prismatic">
-        <origin rpy="1.5708 0 0" xyz="3.65 0.0 0.0" />
+        <origin rpy="1.5708 0 0" xyz="0.15 0.0 0.0" />
         <axis xyz="0 0 1" />
-        <parent link="forearm" />
+        <parent link="tool" />
         <child link="gripper_bottom" />
         <limit effort="100000" velocity="1.0" lower="0" upper="0.0688" />
         <dynamics damping="0.7" friction="1.4" />
     </joint>
     <joint name="gripper_top_joint" type="prismatic">
-        <origin rpy="1.5708 0 0" xyz="3.65 0.0 0.0" />
+        <origin rpy="1.5708 0 0" xyz="0.15 0.0 0.0" />
         <axis xyz="0 0 1" />
-        <parent link="forearm" />
+        <parent link="tool" />
         <child link="gripper_top" />
         <limit effort="100000" velocity="1.0" lower="-0.0688" upper="0" />
         <dynamics damping="0.7" friction="1.4" />
