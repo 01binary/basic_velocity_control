@@ -129,10 +129,10 @@
     </inertial>
   </link>
 
-  <link name="gripper_top">
+  <link name="gripper_bottom">
     <visual>
       <geometry>
-        <mesh filename="package://basic_velocity_control/description/models/gripper-top.stl" />
+        <mesh filename="package://basic_velocity_control/description/models/gripper-bottom.stl" />
       </geometry>
       <material name="aluminum">
         <color rgba="1 1 1 1" />
@@ -140,7 +140,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://basic_velocity_control/description/models/gripper-top.stl" />
+        <mesh filename="package://basic_velocity_control/description/models/gripper-bottom.stl" />
       </geometry>
     </collision>
      <inertial>
@@ -160,10 +160,10 @@
     </inertial>
   </link>
 
-  <link name="gripper_bottom">
+  <link name="gripper_top">
     <visual>
       <geometry>
-        <mesh filename="package://basic_velocity_control/description/models/gripper-bottom.stl" />
+        <mesh filename="package://basic_velocity_control/description/models/gripper-top.stl" />
       </geometry>
       <material name="aluminum">
         <color rgba="1 1 1 1" />
@@ -171,7 +171,7 @@
     </visual>
     <collision>
       <geometry>
-        <mesh filename="package://basic_velocity_control/description/models/gripper-bottom.stl" />
+        <mesh filename="package://basic_velocity_control/description/models/gripper-top.stl" />
       </geometry>
     </collision>
      <inertial>
@@ -226,19 +226,21 @@
     <child link="tool" />
   </joint>
 
-  <joint name="gripper_top_joint" type="prismatic">
-    <origin rpy="0 0 0" xyz="3.5 0.0 0.0" />
+  <joint name="gripper_bottom_joint" type="prismatic">
+    <origin rpy="1.5708 0 0" xyz="3.65 0.0 0.0" />
     <axis xyz="0 0 1" />
     <parent link="forearm" />
-    <limit effort="100000" velocity="1.0" lower="-0.01" upper="0" />
+    <child link="gripper_bottom" />
+    <limit effort="100000" velocity="1.0" lower="0" upper="0.0688" />
     <dynamics damping="0.7" friction="1.4" />
   </joint>
 
-  <joint name="gripper_bottom_joint" type="prismatic">
-    <origin rpy="0 0 0" xyz="3.5 0.0 0.0" />
+  <joint name="gripper_top_joint" type="prismatic">
+    <origin rpy="1.5708 0 0" xyz="3.65 0.0 0.0" />
     <axis xyz="0 0 1" />
     <parent link="forearm" />
-    <limit effort="100000" velocity="1.0" lower="0.01" upper="0" />
+    <child link="gripper_top" />
+    <limit effort="100000" velocity="1.0" lower="-0.0688" upper="0" />
     <dynamics damping="0.7" friction="1.4" />
   </joint>
 
