@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <robot name="robot">
     <!-- Arm Links -->
+    <link name="world" />
     <link name="shoulder">
         <visual>
             <geometry>
