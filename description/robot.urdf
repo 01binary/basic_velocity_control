@@ -2,6 +2,7 @@
 <robot name="robot">
     <!-- Links -->
     <link name="world" />
+    <!-- Arm Links -->
     <link name="shoulder">
         <visual>
             <geometry>
@@ -82,6 +83,8 @@
             <inertia ixx="0.1" ixy="0.1" ixz="0.1" iyy="0.1" iyz="0.1" izz="0.1" />
         </inertial>
     </link>
+    <link name="dummy" />
+    <!-- Gripper links -->
     <link name="gripper_bottom">
         <visual>
             <geometry>
@@ -159,6 +162,7 @@
         <mimic joint="gripper_top_mimic" multiplier="-1.0" offset="0.0" />
         <mimic joint="gripper_bottom_mimic" multiplier="1.0" offset="0.0" />
         <limit effort="100000" velocity="1.0" lower="0" upper="0.0688" />
+        <child link="dummy" />
         <dynamics damping="0.7" friction="1.4" />
     </joint>
     <!-- Mimics -->
@@ -225,5 +229,25 @@
             <robotNamespace>/</robotNamespace>
         </plugin>
     </gazebo>
+    <transmission name="trans_gripper_bottom_mimic">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="gripper_bottom_mimic">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="gripper_bottom_mimic_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_gripper_top_mimic">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="gripper_top_mimic">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="gripper_top_mimic_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
 </robot>
 
