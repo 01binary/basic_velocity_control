@@ -155,15 +155,13 @@
         <parent link="forearm" />
         <child link="tool" />
     </joint>
-    <!-- Gripper Joints -->
+    <!-- Gripper Joint -->
     <joint name="gripper" type="prismatic">
         <origin rpy="1.5708 0 0" xyz="0.15 0.0 0.0" />
         <parent link="tool" />
-        <mimic joint="gripper_top_mimic" multiplier="-1.0" offset="0.0" />
-        <mimic joint="gripper_bottom_mimic" multiplier="1.0" offset="0.0" />
-        <limit effort="100000" velocity="1.0" lower="0" upper="0.0688" />
         <child link="dummy" />
         <dynamics damping="0.7" friction="1.4" />
+        <limit effort="100000" velocity="1.0" lower="0" upper="0.0688" />
     </joint>
     <!-- Mimics -->
     <joint name="gripper_bottom_mimic" type="prismatic">
@@ -173,6 +171,7 @@
         <child link="gripper_bottom" />
         <limit effort="100000" velocity="1.0" lower="0" upper="0.0688" />
         <dynamics damping="0.7" friction="1.4" />
+        <mimic joint="gripper" multiplier="1.0" offset="0.0" />
     </joint>
     <joint name="gripper_top_mimic" type="prismatic">
         <origin rpy="1.5708 0 0" xyz="0.15 0.0 0.0" />
@@ -181,6 +180,7 @@
         <child link="gripper_top" />
         <limit effort="100000" velocity="1.0" lower="-0.0688" upper="0" />
         <dynamics damping="0.7" friction="1.4" />
+        <mimic joint="gripper" multiplier="-1.0" offset="0.0" />
     </joint>
     <!-- Transmissions -->
     <transmission name="trans_shoulder">
