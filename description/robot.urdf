@@ -2,6 +2,26 @@
 <robot name="robot">
     <!-- Arm Links -->
     <link name="world" />
+    <link name="dummy">
+        <visual>
+            <geometry>
+                <sphere radius="0.01" />
+            </geometry>
+            <material name="absplastic">
+                <color rgba="1 1 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="0.01" />
+            </geometry>
+        </collision>
+        <inertial>
+            <origin rpy="0 0 0" xyz="0.16015982 0.02373002 0" />
+            <mass value="1.08815625" />
+            <inertia ixx="0.00252530" ixy="0.00023020" ixz="0.00000000" iyy="0.00412432" iyz="0.00000000" izz="0.00208426" />
+        </inertial>
+    </link>
     <link name="base">
         <visual>
             <geometry>
@@ -63,7 +83,7 @@
         </inertial>
     </link>
     <link name="hand">
-         <visual>
+        <visual>
             <geometry>
                 <mesh filename="package://basic_velocity_control/description/models/hand.stl" />
             </geometry>
@@ -80,26 +100,6 @@
             <origin rpy="0 0 0" xyz="0.01715536 0 0" />
             <mass value="10.32823427" />
             <inertia ixx="0.10297083" ixy="0.00000000" ixz="0.00000000" iyy="0.05951089" iyz="0.00000000" izz="0.09362682" />
-        </inertial>
-    </link>
-    <link name="tool">
-         <visual>
-            <geometry>
-                <sphere radius="0.5" />
-            </geometry>
-            <material name="aluminum">
-                <color rgba="1 1 1 0" />
-            </material>
-        </visual>
-        <collision>
-            <geometry>
-                <sphere radius="0.5" />
-            </geometry>
-        </collision>
-        <inertial>
-            <origin rpy="0 0 0" xyz="0 0 0" />
-            <mass value="0.00000001" />
-            <inertia ixx="0.00000001" ixy="0.00000001" ixz="0.00000001" iyy="0.00000001" iyz="0.00000001" izz="0.00000001" />
         </inertial>
     </link>
     <!-- Gripper links -->
@@ -144,124 +144,132 @@
         </inertial>
     </link>
     <!-- Arm joints -->
-    <joint name="base" type="revolute">
+    <joint name="base_joint" type="revolute">
         <origin rpy="0 0 0" xyz="0 0 0" />
         <axis xyz="0 0 1" />
         <parent link="world" />
-        <child link="shoulder" />
+        <child link="base" />
         <limit effort="100000" velocity="1.0" lower="-1.5708" upper="1.5708" />
         <dynamics damping="0.1" friction="1.4" />
     </joint>
-    <joint name="shoulder" type="revolute">
+    <joint name="shoulder_joint" type="revolute">
         <origin rpy="0 0 0" xyz="0 0 0.670" />
         <axis xyz="0 1 0" />
-        <parent link="shoulder" />
+        <parent link="base" />
         <child link="upperarm" />
         <limit effort="100000" velocity="1.0" lower="-0.8417" upper="1.5708" />
         <dynamics damping="0.1" friction="1.4" />
     </joint>
-    <joint name="elbow" type="revolute">
+    <joint name="elbow_joint" type="revolute">
         <origin rpy="0 0 0" xyz="0.7 0 0" />
-        <axis xyz="0 1 1" />
+        <axis xyz="0 1 0" />
         <parent link="upperarm" />
         <child link="forearm" />
-        <limit effort="100000" velocity="1.0" lower="-1.5708" upper="0" />
+        <limit effort="100000" velocity="1.0" lower="0" upper="1.5708" />
         <dynamics damping="0.7" friction="1.4" />
     </joint>
-    <joint name="wrist" type="fixed">
+    <joint name="wrist_joint" type="revolute">
         <origin rpy="0 0 0" xyz="0.7 0.05 0.0" />
         <axis xyz="1 0 0" />
         <parent link="forearm" />
-        <child link="tool" />
+        <child link="hand" />
         <limit effort="100000" velocity="1.0" lower="-1.5708" upper="1.5708" />
         <dynamics damping="0.7" friction="1.4" />
     </joint>
-    <!-- Gripper Joint -->
-    <joint name="gripper" type="prismatic">
-        <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
+    <joint name="finger_joint" type="prismatic">
+        <origin rpy="0 0 0" xyz="0 0 0" />
         <axis xyz="0 1 0" />
         <parent link="hand" />
-        <child link="tool" />
-        <dynamics damping="0.7" friction="1.4" />
+        <child link="dummy" />
         <limit effort="100000" velocity="1.0" lower="0" upper="0.07" />
+        <dynamics damping="0.7" friction="1.4" />
     </joint>
-    <!-- Gripper Mimics -->
-    <joint name="gripper_bottom_mimic" type="prismatic">
-        <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
+    <joint name="finger1_joint" type="prismatic">
+        <origin rpy="0 0 0" xyz="0 0 0" />
         <axis xyz="0 1 0" />
         <parent link="hand" />
         <child link="finger1" />
         <limit effort="100000" velocity="1.0" lower="0" upper="0.07" />
         <dynamics damping="0.7" friction="1.4" />
-        <mimic joint="gripper" multiplier="1.0" offset="0.0" />
+        <mimic joint="finger_joint" multiplier="1.0" offset="0.0" />
     </joint>
-    <joint name="gripper_top_mimic" type="prismatic">
-        <origin rpy="0 0 0" xyz="0.0 0.0 0.0" />
+    <joint name="finger2_joint" type="prismatic">
+        <origin rpy="0 0 0" xyz="0 0 0" />
         <axis xyz="0 1 0" />
         <parent link="hand" />
         <child link="finger2" />
         <limit effort="100000" velocity="1.0" lower="-0.07" upper="0" />
         <dynamics damping="0.7" friction="1.4" />
-        <mimic joint="gripper" multiplier="-1.0" offset="0.0" />
+        <mimic joint="finger_joint" multiplier="-1.0" offset="0.0" />
     </joint>
     <!-- Transmissions -->
-    <transmission name="trans_base">
+    <transmission name="trans_base_joint">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="base">
+        <joint name="base_joint">
             <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
         </joint>
-        <actuator name="base_motor">
-            <mechanicalReduction>1</mechanicalReduction>
+        <actuator name="base_joint_motor">
             <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
-    <transmission name="trans_shoulder">
+    <transmission name="trans_shoulder_joint">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="shoulder">
+        <joint name="shoulder_joint">
             <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
         </joint>
-        <actuator name="shoulder_motor">
-            <mechanicalReduction>1</mechanicalReduction>
+        <actuator name="shoulder_joint_motor">
             <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
-    <transmission name="trans_elbow">
+    <transmission name="trans_elbow_joint">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="elbow">
+        <joint name="elbow_joint">
             <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
         </joint>
-        <actuator name="elbow_motor">
-            <mechanicalReduction>1</mechanicalReduction>
+        <actuator name="elbow_joint_motor">
             <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
-    <transmission name="trans_gripper">
+    <transmission name="trans_wrist_joint">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="gripper">
+        <joint name="wrist_joint">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="wrist_joint_motor">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_finger_joint">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="finger_joint">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         </joint>
-        <actuator name="gripper_motor">
+        <actuator name="finger_joint_motor">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
-    <transmission name="trans_finger1_mimic">
+    <transmission name="trans_finger1_joint">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="finger1_mimic">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <joint name="finger1_joint">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         </joint>
-        <actuator name="finger1_mimic_motor">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <actuator name="finger1_joint_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
-    <transmission name="trans_finger2_mimic">
+    <transmission name="trans_finger2_joint">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="finger2_mimic">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <joint name="finger2_joint">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         </joint>
-        <actuator name="finger2_mimic_motor">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <actuator name="finger2_joint_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
@@ -269,24 +277,6 @@
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
             <robotNamespace>/</robotNamespace>
-        </plugin>
-        <plugin
-            name="finger1_mimic_plugin"
-            filename="libroboticsgroup_gazebo_mimic_joint_plugin.so"
-        >
-            <joint>gripper</joint>
-            <mimicJoint>finger1_mimic</mimicJoint>
-            <multiplier>-1.0</multiplier>
-            <offset>0.0</offset>
-        </plugin>
-        <plugin
-            name="gripper_bottom_mimic_plugin"
-            filename="libroboticsgroup_gazebo_mimic_joint_plugin.so"
-        >
-            <joint>gripper</joint>
-            <mimicJoint>finger2_mimic</mimicJoint>
-            <multiplier>1.0</multiplier>
-            <offset>0.0</offset>
         </plugin>
     </gazebo>
 </robot>
